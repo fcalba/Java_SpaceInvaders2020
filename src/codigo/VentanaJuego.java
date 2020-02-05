@@ -17,18 +17,19 @@ import javax.swing.Timer;
  * @author jorgecisneros
  */
 public class VentanaJuego extends javax.swing.JFrame {
+
     static int ANCHOPANTALLA = 800;
     static int ALTOPANTALLA = 600;
-    
+
     int filasMarcianos = 5;
     int columnasMarcianos = 10;
-    
+    int contador = 0;
+
     BufferedImage buffer = null;
-    
+
     //bucle de animacion del juego
     //en este caso, es un hilo de ejecucion nuevo que se encarga 
     //de refrescar el contenido de la pantalla
-    
     Timer temporizador = new Timer(10, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -36,6 +37,9 @@ public class VentanaJuego extends javax.swing.JFrame {
             bucleDelJuego();
         }
     });
+
+    Marciano miMarciano = new Marciano(ANCHOPANTALLA);
+
     /**
      * Creates new form VentanaJuego
      */
@@ -44,21 +48,29 @@ public class VentanaJuego extends javax.swing.JFrame {
         setSize(ANCHOPANTALLA, ALTOPANTALLA);
         buffer = (BufferedImage) jPanel1.createImage(ANCHOPANTALLA, ALTOPANTALLA);
         buffer.createGraphics();
-        
+
         //arranco el temporizador para que empiece el juego
         temporizador.start();
     }
-    
-    private void bucleDelJuego(){
+
+    private void bucleDelJuego() {
         //este metodo gobierna el redibujado de los objetos en el jPanel1
-        
+
         //primero borro todo lo que hay en el buffer
         Graphics2D g2 = (Graphics2D) buffer.getGraphics();
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
-        
+
+        contador++;
         //////////////////////////////////////////////////////////////////
-        
+        if (contador < 50) {
+            g2.drawImage(miMarciano.imagen1, 10, 10, null);
+        }else if (contador < 100){
+            g2.drawImage(miMarciano.imagen2, 10, 10, null);
+        }else{
+            contador = 0;
+        }
+
         //////////////////////////////////////////////////////////////////
         //dibujo de golpe todo el buffer sobre el jpanel1
         g2 = (Graphics2D) jPanel1.getGraphics();
