@@ -38,7 +38,8 @@ public class VentanaJuego extends javax.swing.JFrame {
         }
     });
 
-    Marciano miMarciano = new Marciano(ANCHOPANTALLA);
+    Marciano miMarciano = new Marciano(ANCHOPANTALLA);//INICIALIZO
+    Nave miNave = new Nave();
 
     /**
      * Creates new form VentanaJuego
@@ -51,6 +52,9 @@ public class VentanaJuego extends javax.swing.JFrame {
 
         //arranco el temporizador para que empiece el juego
         temporizador.start();
+        miNave.posX = ANCHOPANTALLA /2 - miNave.imagen.getWidth(this)/2;
+        miNave.posY = ALTOPANTALLA - 100;
+        
     }
 
     private void bucleDelJuego() {
@@ -62,6 +66,7 @@ public class VentanaJuego extends javax.swing.JFrame {
         g2.fillRect(0, 0, ANCHOPANTALLA, ALTOPANTALLA);
 
         contador++;
+        //dibujo
         //////////////////////////////////////////////////////////////////
         if (contador < 50) {
             g2.drawImage(miMarciano.imagen1, 10, 10, null);
@@ -70,6 +75,8 @@ public class VentanaJuego extends javax.swing.JFrame {
         }else{
             contador = 0;
         }
+        //dibujo la nave 
+        g2.drawImage(miNave.imagen, miNave.posX, miNave.posY, null);
 
         //////////////////////////////////////////////////////////////////
         //dibujo de golpe todo el buffer sobre el jpanel1
