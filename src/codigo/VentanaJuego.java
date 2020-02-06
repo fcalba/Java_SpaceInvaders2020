@@ -41,6 +41,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
     Marciano miMarciano = new Marciano(ANCHOPANTALLA);//INICIALIZO
     Nave miNave = new Nave();
+    Disparo miDisparo = new Disparo();
 
     /**
      * Creates new form VentanaJuego
@@ -78,7 +79,10 @@ public class VentanaJuego extends javax.swing.JFrame {
         }
         //dibujo la nave 
         g2.drawImage(miNave.imagen, miNave.posX, miNave.posY, null);
+        g2.drawImage(miDisparo.imagen, miDisparo.posX, miDisparo.posY, null);
         miNave.mueve();
+        miDisparo.mueve();
+        
         //////////////////////////////////////////////////////////////////
         //dibujo de golpe todo el buffer sobre el jpanel1
         g2 = (Graphics2D) jPanel1.getGraphics();
@@ -154,7 +158,8 @@ public class VentanaJuego extends javax.swing.JFrame {
                 miNave.setPulsadoIzquierda(true);
                 break;
             case KeyEvent.VK_RIGHT : miNave.setPulsadoDerecha(true); break;
-
+            case KeyEvent.VK_SPACE : miDisparo.posicionaDisparo(miNave);
+                                     break;
         }
     }//GEN-LAST:event_formKeyPressed
 
