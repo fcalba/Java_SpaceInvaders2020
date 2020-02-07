@@ -41,7 +41,7 @@ public class VentanaJuego extends javax.swing.JFrame {
 
     Marciano miMarciano = new Marciano(ANCHOPANTALLA);//INICIALIZO
     Marciano[][] listaMarcianos = new Marciano[filasMarcianos][columnasMarcianos];
-    boolean direccionMarciano = false;
+    boolean direccionMarciano = true;
     Nave miNave = new Nave();
     Disparo miDisparo = new Disparo();
 
@@ -95,9 +95,19 @@ public class VentanaJuego extends javax.swing.JFrame {
     }
     
     private void pintaMarcianos(Graphics2D _g2){
+       
         for (int i = 0; i < filasMarcianos; i++){
             for (int j = 0; j < columnasMarcianos; j++){
                 listaMarcianos[i][j].mueve(direccionMarciano);
+                if (listaMarcianos[i][j].posX >= ANCHOPANTALLA - listaMarcianos[i][j].imagen1.getWidth(null) || listaMarcianos[i][j].posX <=0){
+            direccionMarciano = !direccionMarciano;
+            //hago que todos los marcianos salten a la siguiente columna
+            for(int k = 0; k < filasMarcianos; k++)
+                for (int m = 0; m < columnasMarcianos; m++){
+                    listaMarcianos[k][m].posY += listaMarcianos[k][m].imagen1.getHeight(null);
+                }
+            
+        }
                 if (contador < 50){
                     _g2.drawImage(listaMarcianos[i][j].imagen1, listaMarcianos[i][j].posX, listaMarcianos[i][j].posY,null);
                 }
