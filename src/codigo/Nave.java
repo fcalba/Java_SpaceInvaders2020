@@ -1,7 +1,6 @@
 package codigo;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 /**
@@ -16,14 +15,6 @@ public class Nave {
 
     private boolean pulsadoIzquierda = false;
     private boolean pulsadoDerecha = false;
-
-    public Nave() {
-        try {
-            imagen = ImageIO.read(getClass().getResource("/imagenes/nave.png"));
-        } catch (Exception e) {
-
-        }
-    }
 
     public void mueve() {
         if (pulsadoIzquierda && posX >0) {
